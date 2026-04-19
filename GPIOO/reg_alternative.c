@@ -1,0 +1,36 @@
+#include <stdint.h>
+#include "reg_alternative.h"
+
+#define RCC_APB2ENR (*(volatile reg_base*)0x40021018)
+
+void GPIO_clk_enable() {
+    RCC_APB2ENR.bit_field.bits.bit2 = 1;
+    RCC_APB2ENR.bit_field.bits.bit3 = 3;
+}
+
+void GPIO_init() {
+    GPIOA->GPIOx_CRL.bit_field.bits.mode0 = 0;
+    GPIOA->GPIOx_CRL.bit_field.bits.cnf0 = 2;
+
+    GPIOA->GPIOx_ODR.bit_field.bits.bit0 = 1;
+    
+    GPIOA->GPIOx_CRL.bit_field.bits.mode3 = 1;
+    GPIOA->GPIOx_CRL.bit_field.bits.cnf3 = 0;
+}
+
+int main() {
+    GPIO_clk_enable();
+    GPIO_init();
+
+    while (1){
+        if(GPIOA->GPIOx_IDR.bit_field.bits.bit0 == 0) {
+            GPIOB->GPIOx_BSRR.bit_field.bits.bit4 = 1; //LED on
+            GPIOB->GPIOx_BSRR.bit_field.bits.bit19 = 0;//LED off
+        } else {
+            GPIOB->GPIOx_BSRR.bit_field.bits.bit4 = 0; //LED on
+            GPIOB->GPIOx_BSRR.bit_field.bits.bit19 = 1;//LED off
+        }
+    }
+    
+    return 0;
+}
