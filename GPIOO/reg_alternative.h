@@ -89,30 +89,6 @@ typedef struct {
 } reg_base_CRH;
 
 typedef struct {
-    union {
-        uint32_t reg;
-        struct{
-            uint32_t mode8 : 2;
-            uint32_t cnf8 : 2;
-            uint32_t mode9 : 2;
-            uint32_t cnf9 : 2;
-            uint32_t mode10 : 2;
-            uint32_t cnf10 : 2;
-            uint32_t mode11 : 2;
-            uint32_t cnf11 : 2;
-            uint32_t mode12 : 2; 
-            uint32_t cnf12 : 2;
-            uint32_t mode13 : 2;
-            uint32_t cnf13 : 2;
-            uint32_t mode14 : 2;
-            uint32_t cnf14 : 2;
-            uint32_t mode15 : 2;
-            uint32_t cnf15 : 2;
-        } bits;
-    } GPIOx_CRH;
-} reg_base_CRH;
-
-typedef struct {
     volatile reg_base_CRL GPIOx_CRL;   //0x00
     volatile reg_base_CRH GPIOx_CRH;   //0x04
     volatile reg_base GPIOx_IDR;   //0x08

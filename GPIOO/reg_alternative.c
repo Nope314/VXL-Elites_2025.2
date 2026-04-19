@@ -5,7 +5,7 @@
 
 void GPIO_clk_enable() {
     RCC_APB2ENR.bit_field.bits.bit2 = 1;
-    RCC_APB2ENR.bit_field.bits.bit3 = 3;
+    RCC_APB2ENR.bit_field.bits.bit3 = 1;
 }
 
 void GPIO_init() {
@@ -14,8 +14,8 @@ void GPIO_init() {
 
     GPIOA->GPIOx_ODR.bit_field.bits.bit0 = 1;
     
-    GPIOA->GPIOx_CRL.bit_field.bits.mode3 = 1;
-    GPIOA->GPIOx_CRL.bit_field.bits.cnf3 = 0;
+    GPIOA->GPIOx_CRH.bit_field.bits.mode13 = 1;
+    GPIOA->GPIOx_CRH.bit_field.bits.cnf13 = 0;
 }
 
 int main() {
