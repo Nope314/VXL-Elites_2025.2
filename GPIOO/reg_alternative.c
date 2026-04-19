@@ -25,12 +25,12 @@ int main() {
     while (1){
         if(GPIOA->GPIOx_IDR.bit_field.bits.bit0 == 0) {
             //LED on
-            GPIOB->GPIOx_BSRR.bit_field.bits.bit4 = 1; 
-            GPIOB->GPIOx_BSRR.bit_field.bits.bit19 = 0;
+            GPIOB->GPIOx_BSRR.bit_field.bits.bit4 = 1;
+            GPIOB->GPIOx_BRR.bit_field.bits.bit4 = 0;
         } else {
             //LED off
-            GPIOB->GPIOx_BSRR.bit_field.bits.bit4 = 0; 
-            GPIOB->GPIOx_BSRR.bit_field.bits.bit19 = 1;
+            GPIOB->GPIOx_BSRR.bit_field.bits.bit4 = 0;
+            GPIOB->GPIOx_BRR.bit_field.bits.bit4 = 1;
         }
     }
 
