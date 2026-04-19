@@ -14,8 +14,8 @@ void GPIO_init() {
 
     GPIOA->GPIOx_ODR.bit_field.bits.bit0 = 1;
     
-    GPIOA->GPIOx_CRH.bit_field.bits.mode13 = 1;
-    GPIOA->GPIOx_CRH.bit_field.bits.cnf13 = 0;
+    GPIOB->GPIOx_CRH.bit_field.bits.mode13 = 1;
+    GPIOB->GPIOx_CRH.bit_field.bits.cnf13 = 0;
 }
 
 int main() {
