@@ -23,8 +23,6 @@ typedef union
     } bits;//chia nhỏ 32 bit thành các bit nhỏ hơn để dễ thao tác
 }GPIOx_CRL;//định nghĩa kiểu dữ liệu cho thanh ghi CRL của GPIO, trong đó có 16 cặp bit mode và cnf tương ứng với 16 chân GPIO
 
-#define GPIOA_CRL_struct (*((volatile GPIOx_CRL *)0x40010800)) //truy cập giá trị của thanh ghi CRL của GPIOA thông qua con trỏ kiểu GPIOx_CRL tại địa chỉ 0x40010800
-#define GPIOB_CRL_struct (*((volatile GPIOx_CRL *)0x40010C00))
 typedef union 
 {
     uint32_t GPIOx_CRH;
@@ -47,9 +45,6 @@ typedef union
         uint32_t cnf15 : 2;
     } bits;
 }GPIOx_CRH;
-
-#define GPIOA_CRH_struct (*((volatile GPIOx_CRH *)0x40010804))
-#define GPIOB_CRH_struct (*((volatile GPIOx_CRH *)0x40010C04))
 
 
 typedef
@@ -76,10 +71,6 @@ union
     } bits;
 }GPIOx_IDR;
 
-#define GPIOA_IDR_struct (*((volatile GPIOx_IDR *)0x40010808))
-#define GPIOB_IDR_struct (*((volatile GPIOx_IDR *)0x40010C08))
-
-
 typedef union 
 {
     uint32_t GPIOx_ODR;
@@ -102,9 +93,6 @@ typedef union
         uint32_t odr15 : 1;
     } bits;
 }GPIOx_ODR;
-
-#define GPIOA_ODR_struct (*((volatile GPIOx_ODR *)0x4001080C))
-#define GPIOB_ODR_struct (*((volatile GPIOx_ODR *)0x40010C0C))
 
 typedef union 
 {
@@ -147,9 +135,6 @@ typedef union
     } bits;
 }GPIOx_BSRR;
 
-#define GPIOA_BSRR_struct (*((volatile GPIOx_BSRR *)0x40010810))
-#define GPIOB_BSRR_struct (*((volatile GPIOx_BSRR *)0x40010C10))
-
 typedef union 
 {
     uint32_t GPIOx_BRR;
@@ -173,9 +158,6 @@ typedef union
 
     } bits;
 }GPIOx_BRR;
-
-#define GPIOA_BRR_struct (*((volatile GPIOx_BRR *)0x40010814))
-#define GPIOB_BRR_struct (*((volatile GPIOx_BRR *)0x40010C14))
 
 typedef union 
 {
@@ -203,29 +185,25 @@ typedef union
     } bits;
 }GPIOx_LCKR;
 
-#define GPIOA_LCKR_struct (*((volatile GPIOx_LCKR *)0x40010818))
-#define GPIOB_LCKR_struct (*((volatile GPIOx_LCKR *)0x40010C18))
-
-//nhớ check lại xem địa chỉ đã đúng chưa
 //câu 2
-struct register_map
+typedef struct
 {
-    volatile uint32_t GPIOx_CRL; //0x00
-    volatile uint32_t GPIOx_CRH; //0x04
-    volatile uint32_t GPIOx_IDR; //0x08
-    volatile uint32_t GPIOx_ODR; //0x0C
-    volatile uint32_t GPIOx_BSRR; //0x10
-    volatile uint32_t GPIOx_BRR; //0x14
-    volatile uint32_t GPIOx_LCKR; //0x18
-};
+    GPIOx_CRL CRL;      // 0x00
+    GPIOx_CRH CRH;      
+    GPIOx_IDR IDR;
+    GPIOx_ODR ODR;
+    GPIOx_BSRR BSRR;
+    GPIOx_BRR BRR;
+    GPIOx_LCKR LCKR;
+} GPIO_TypeDef;
 //mục 9.5 trong reference manual
 
 //câu 3
 
-#define GPIOA ((volatile struct register_map *)0x40010800) //base address của GPIOA, trong đó có các thanh ghi CRL, CRH, IDR, ODR, BSRR, BRR, LCKR được định nghĩa ở trên
-#define GPIOB ((volatile struct register_map *)0x40010C00)
-#define GPIOC ((volatile struct register_map *)0x40011000)
-#define GPIOD ((volatile struct register_map *)0x40011400)
-#define GPIOE ((volatile struct register_map *)0x40011800)
-#define GPIOF ((volatile struct register_map *)0x40011C00)
-#define GPIOG ((volatile struct register_map *)0x40012000)
+#define GPIOA ((volatile GPIO_TypeDef *)0x40010800) //base address của GPIOA, trong đó có các thanh ghi CRL, CRH, IDR, ODR, BSRR, BRR, LCKR được định nghĩa ở trên
+#define GPIOB ((volatile GPIO_TypeDef *)0x40010C00)
+#define GPIOC ((volatile GPIO_TypeDef *)0x40011000)
+#define GPIOD ((volatile GPIO_TypeDef *)0x40011400)
+#define GPIOE ((volatile GPIO_TypeDef *)0x40011800)
+#define GPIOF ((volatile GPIO_TypeDef *)0x40011C00)
+#define GPIOG ((volatile GPIO_TypeDef *)0x40012000)
