@@ -1,5 +1,8 @@
-	#include "stm32f10x.h"
-	#include "stdio.h"
+//Đọc DMA trên bluepill , dùng DMA lấy mẫu ADC nối với microphone, lấy mẫu tiếng nói đấy và in ra uart ,
+//nối một vào 1 file in ra uart và vẽ bằng python in mẫu hình (làm real time là optional)
+
+#include "stm32f10x.h"
+#include "stdio.h"
 
 	void GPIO_DRV_Init(void)
 	{
