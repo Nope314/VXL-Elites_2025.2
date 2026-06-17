@@ -1,6 +1,6 @@
 #include <stm32f10x.h>
 
-//================ GPIO =================
+//GPIO 
 void GPIO_Init_Config(void)
 {
     // Clock GPIOA + GPIOC + AFIO
@@ -100,7 +100,7 @@ void delay_ms(uint32_t time_ms){
 	for(volatile uint32_t i=0;i<time_ms;i++);
 }
 
-//================ EXTI =================
+// EXTI
 void EXTI0_DRV_Init(void)
 {
     // PA0 -> EXTI0
@@ -139,7 +139,7 @@ volatile uint8_t rx_data=0;
 volatile uint8_t rx_bit_idx=0;	//index of 10bit
 volatile uint8_t rx_done=0;
 	
-//================ ISR =================
+//ISR 
  void EXTI0_IRQHandler(void)
 {
     if(EXTI->PR & (1 << 0))
@@ -228,7 +228,7 @@ void UART1_SendString(char *str)
         UART1_SendChar(*str++);
     }
 }
-
+//ham dung de debug
 void UART1_SendHex(uint8_t x)
 {
     char hex[] = "0123456789ABCDEF";
